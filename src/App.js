@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { HamburgerArrowTurn } from "react-animated-burgers";
 import "./index.css";
+// import "./mine.css";
+
 import Scene from "./Scene";
 import Popup from "./Popup";
 
@@ -10,7 +12,7 @@ class App extends Component {
     this.state = { showDetails: false };
   }
   togglePopup = () => {
-    // this.setState({ showDetails: !this.state.showDetails });
+    this.setState({ showDetails: !this.state.showDetails });
   };
   render() {
     return (

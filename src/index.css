@@ -68,13 +68,13 @@ body {
   margin: auto;
   width: 50vw;
   padding-top: 25vh;
-  -webkit-animation: appear-left 3s;
+  -webkit-animation: appear-left 1s;
   animation: apear-left 0.3s;
 }
 .section p {
   color: rgba(255, 255, 255, 0.6);
-  -webkit-animation: appear-up 3s;
-  animation: appear-up 2s;
+  -webkit-animation: appear-up 2s;
+  animation: appear-up 1s;
 }
 .section h1 {
   display: flex;
