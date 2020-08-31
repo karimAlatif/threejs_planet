@@ -2,6 +2,18 @@
 @import url("https://fonts.googleapis.com/css?family=Poiret+One&display=swap");
 @import url("https://fonts.googleapis.com/css?family=Exo&display=swap");
 
+.col-1 {width: 8.33%;}
+.col-2 {width: 16.66%;}
+.col-3 {width: 25%;}
+.col-4 {width: 33.33%;}
+.col-5 {width: 41.66%;}
+.col-6 {width: 50%;}
+.col-7 {width: 58.33%;}
+.col-8 {width: 66.66%;}
+.col-9 {width: 75%;}
+.col-10 {width: 83.33%;}
+.col-11 {width: 91.66%;}
+.col-12 {width: 100%;}
 body {
   margin: 0;
   padding: 0;
@@ -68,13 +80,13 @@ body {
   margin: auto;
   width: 50vw;
   padding-top: 25vh;
-  -webkit-animation: appear-left 1s;
-  animation: apear-left 0.3s;
+  /* -webkit-animation: appear-left 1s;
+  animation: appear-left 0.3s; */
 }
 .section p {
   color: rgba(255, 255, 255, 0.6);
-  -webkit-animation: appear-up 2s;
-  animation: appear-up 1s;
+  /* -webkit-animation: appear-up 2s; */
+  /* animation: appear-up 1s; */
 }
 .section h1 {
   display: flex;
@@ -83,8 +95,8 @@ body {
   text-align: center;
   text-shadow: 0px 0px 30px rgba(255, 255, 255, 1);
   margin-bottom: 50px;
-  -webkit-animation: appear-down 3s;
-  animation: appear-down 2s;
+  /* -webkit-animation: appear-down 3s; */
+  /* animation: appear-down 2s; */
 }
 .section h1:before,
 .section h1:after {
@@ -118,6 +130,19 @@ body {
   color: white;
   text-decoration: none;
 }
+
+.grid-container {
+  display: flex;
+  grid-gap: 100px;
+  grid-template-columns: auto auto auto;
+  padding: 10px;
+}
+.grid-item {
+  padding: 25px;
+  font-size: 30px;
+  text-align: center;
+}
+
 @keyframes title {
   from {
     opacity: 0;
