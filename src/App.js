@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { HamburgerArrowTurn } from "react-animated-burgers";
+import 'bootstrap/dist/css/bootstrap.min.css';
 import "./index.css";
+
 // import "./mine.css";
 
 import Scene from "./Scene";

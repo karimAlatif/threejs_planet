@@ -76,6 +76,15 @@ class Scene extends Component {
 
     //Start create the environment
     this.initEnvironment();
+    window.addEventListener( 'resize', (e) => {
+      if(!this.renderer)
+        return
+      this.camera.aspect = window.innerWidth / window.innerHeight;
+      this.camera.updateProjectionMatrix();
+      this.renderer.setSize(window.innerWidth, window.innerHeight);
+
+    }, false );
+
     this.animate();
   }
   initEnvironment () {
