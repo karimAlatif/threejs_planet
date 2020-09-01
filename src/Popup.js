@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Aos from "aos";
 import "aos/dist/aos.css";
 import AnimatedNumber from 'react-animated-number';
@@ -7,14 +7,14 @@ import handleViewport from 'react-in-viewport';
 
 const numBlock = (props) => {
   const { inViewport, forwardedRef, data } = props;
-  console.log("ins ",inViewport )
+  // console.log("ins ",inViewport )
   return (
     <div ref={forwardedRef} >
       {
         inViewport && <div className="grid-container">
           {
             data.map((item,index)=>{
-              return <div key={index} className="grid-item">
+              return <div key={index} className="grid-item col4">
                 <AnimatedNumber 
                   value={item.count}
                   style={{
@@ -28,7 +28,7 @@ const numBlock = (props) => {
                   formatValue={n => n.toFixed(0)}
                   /><strong>{item.type}</strong>
                 <br/>
-                <p>{item.name}</p>
+                <p data-aos="fade-down" >{item.name}</p>
               </div>
             })
           }
@@ -37,32 +37,100 @@ const numBlock = (props) => {
     </div>
   );
 };
-
 const ViewportBlock = handleViewport(numBlock, /** options: {}, config: {} **/);
 
+const sectionsTags = [
+    "aboutUs",
+    "Approach",
+    "data",
+    "GISTechnologies",
+];
+
 const Popup = () => {
+  const [sectionIndex, setSectionIndex] = useState(0);
+  const [isMoving, setMoving] = useState(false);
+  window.addEventListener("wheel", function(e){e.preventDefault();}, {passive: false} );
+
   useEffect(()=>{
     Aos.init({
-      duration:1500,
-    });
+      duration:1200,
+      once: false,
+      mirror: true, // whether elements should animate out while scrolling past them
+    })
   })
+
+  const renderIcons = (data) => {
+    return (
+      <div className="grid-container">
+        {
+          data.map( (item,index)=>{
+            return <div key={index} className="grid-item col3">
+              <img data-aos="zoom-in" src={item.imgPath} alt="Trulli" width="50" height="50"></img>
+              <strong>{item.type}</strong>
+              <br/>
+              <br/>
+              <p data-aos="fade-down" >{item.name}</p>
+            </div>
+          })
+        }
+      </div>
+    ) 
+  }
+
   return (
-    <div className="menu">
-      <div className="section">
+
+    <div id="mm" className="menu" onWheel = {(e) => {
+        console.log("try to scroll");
+
+        let elem = null;
+        if(!isMoving){
+            setMoving(true);
+            console.log("scroll !!");
+            console.log("bb ",sectionIndex )
+
+            if (e.deltaY > 0){
+                console.log('scrolling up');
+                if(sectionIndex === sectionsTags.length -1 ){
+                  console.log("final up");
+                  setMoving(false);
+                  return;
+                }
+                setSectionIndex(sectionIndex + 1);
+                elem = document.getElementById(sectionsTags[sectionIndex + 1]); 
+            } else if (e.deltaY < 0){
+              console.log('scrolling down');
+              if(sectionIndex === 0 ){
+                console.log("final down");
+                setMoving(false);
+                return;
+              }
+              setSectionIndex(sectionIndex - 1);
+              elem = document.getElementById(sectionsTags[sectionIndex - 1]); 
+            }
+            elem.scrollIntoView({ behavior: 'smooth'}); 
+            setTimeout(()=>{
+              console.log("reset");
+              Aos.refresh();
+              // Aos.refreshHard()
+              setMoving(false);
+            },500)
+        }
+    }}>
+        
+      <div id = {sectionsTags[0]} className="section">
         <h1 data-aos="fade-up" >About Us</h1>
-        <p data-aos="fade-down">
+        <p  data-aos="fade-down">
         Animals (also called Metazoa) are multicellular eukaryotic organisms that form the biological kingdom Animalia.
         With few exceptions, animals consume organic material, breathe oxygen, are able to move, can reproduce sexually,
         and grow from a hollow sphere of cells, the blastula, during embryonic development. Over 1.5 million living animal
         species have been described—of which around 1 million are insects—but it has been estimated there are over 7 million
         animal species in total </p>
       </div>
-      <div className="section">
-        <h1>The ‘Propeterra’ Approach</h1>
-        <p>
-        Video Here</p>
+      <div id = {sectionsTags[1]} className="section">
+        <h1 data-aos="fade-down" >The ‘Propeterra’ Approach</h1>
+        <p >Video Here</p>
       </div>
-      <div className="section">
+      <div id = {sectionsTags[2]} className="section">
         <h1>Our data</h1>
         <br/>
         <br/>
@@ -73,20 +141,20 @@ const Popup = () => {
             {count:6, type:" M" , name:"buildings"},
             {count:5, type:" M", name:"economic-property records"},
           ]}
-          onEnterViewport={() => console.log('enter')} 
+          onEnterViewport={() => null } 
           onLeaveViewport={() => console.log('leave')} 
         />
       </div>
-      <section className="section">
+      <div id = {sectionsTags[3]} className="section">
         <h1>GIS Technologies</h1>
-        <p>
-        Animals (also called Metazoa) are multicellular eukaryotic organisms that form the biological kingdom Animalia.
-        With few exceptions, animals consume organic material, breathe oxygen, are able to move, can reproduce sexually,
-        and grow from a hollow sphere of cells, the blastula, during embryonic development. Over 1.5 million living animal
-        species have been described—of which around 1 million are insects—but it has been estimated there are over 7 million
-        animal species in total .
-        </p>
-      </section>
+        {
+          renderIcons([
+              {imgPath:"./icons/world.png", name:"Icon 1"},
+              {imgPath:"./icons/world-financial.png", name:"Icon 2"},
+              {imgPath:"./icons/map.png", name:"Icon 3"},
+            ])
+        }
+      </div>
     </div>
   );
 };
