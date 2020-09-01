@@ -118,7 +118,7 @@ const Popup = () => {
     }}>
         
       <div id = {sectionsTags[0]} className="section">
-        <h1 data-aos="fade-up" >About Us</h1>
+        <h1 data-aos="zoom-out" >About Us</h1>
         <p  data-aos="fade-down">
         Animals (also called Metazoa) are multicellular eukaryotic organisms that form the biological kingdom Animalia.
         With few exceptions, animals consume organic material, breathe oxygen, are able to move, can reproduce sexually,
@@ -127,11 +127,11 @@ const Popup = () => {
         animal species in total </p>
       </div>
       <div id = {sectionsTags[1]} className="section">
-        <h1 data-aos="fade-down" >The ‘Propeterra’ Approach</h1>
+        <h1 data-aos="zoom-out" >The ‘Propeterra’ Approach</h1>
         <p >Video Here</p>
       </div>
       <div id = {sectionsTags[2]} className="section">
-        <h1>Our data</h1>
+        <h1 data-aos="zoom-out">Our data</h1>
         <br/>
         <br/>
         <ViewportBlock
@@ -146,7 +146,7 @@ const Popup = () => {
         />
       </div>
       <div id = {sectionsTags[3]} className="section">
-        <h1>GIS Technologies</h1>
+        <h1 data-aos="zoom-out" >GIS Technologies</h1>
         {
           renderIcons([
               {imgPath:"./icons/world.png", name:"Icon 1"},
