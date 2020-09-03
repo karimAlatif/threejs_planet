@@ -821,59 +821,6 @@ html.fp-enabled,
   
 }
 
-#fp-nav.right {
-  right:37px
-}
-
-#fp-nav ul li {
-  width:auto;
-  height:auto;
-  margin:0;
-  padding:0
-}
-
-#fp-nav ul li .fp-tooltip {
-  position:absolute;
-  top:-2px;
-  color:#fff;
-  font-size:14px;
-  white-space:nowrap;
-  max-width:220px;
-  overflow:hidden;
-  display:block;
-  width:auto;
-  -webkit-transition:all .25s ease!important;
-  -o-transition:all .25s ease!important;
-  transition:all .25s ease!important;
-  visibility:hidden;
-  opacity:0
-}
-
-#fp-nav ul li .fp-tooltip.right {
-  padding-right:20px;
-  top:8px;
-  right:20px
-}
-
-#fp-nav:hover ul li .fp-tooltip {
-  opacity:.5;
-  visibility:visible
-}
-
-#fp-nav:hover ul li:hover .fp-tooltip {
-  opacity:1
-}
-
-#fp-nav:hover span {
-  background:rgba(255,255,255,.35);
-}
-
-#fp-nav ul li a.active span,#fp-nav ul li a:hover span,#fp-nav ul li:hover a.active span {
-  background:#fff;
-  -webkit-transition:all .25s ease-in-out;
-  -o-transition:all .25s ease-in-out;
-  transition:all .25s ease-in-out
-}
 
 
 /* ========== RESPONSIVE ========== */

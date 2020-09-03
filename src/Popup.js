@@ -41,21 +41,25 @@ const numBlock = (props) => {
 };
 const ViewportBlock = handleViewport(numBlock, /** options: {}, config: {} **/);
 
-const sectionsTags = [
-    "aboutUs",
-    "Approach",
-    "data",
-    "GISTechnologies",
-    "ActionableInsights",
-    "Launchpad",
-    "DealsDriving",
-    "GlobalReal",
-    "ContactUs"
+const initSectionsTags = [
+    {id:"aboutUs", name:"aboutUs", style: "active"},
+    {id:"Approach", name:"The ‘Propeterra’ Approach", style: ""},
+    {id:"data", name:"Our data", style: ""},
+    {id:"GISTechnologies", name:"GIS Technologies", style: ""},
+    {id:"ActionableInsights", name:"Actionable Insights", style: ""},
+    {id:"Launchpad", name:"The Launchpad", style: ""},
+    {id:"DealsDriving", name:"Deals Driving the Market", style: ""},
+    {id:"GlobalReal", name:"Global Real Estate Experts", style: ""},
+    {id:"ContactUs", name:"Contact Us", style: ""},
 ];
 
 const Popup = () => {
+
+  const [sectionsTags, setSectionsTags] = useState(initSectionsTags);
+
   const [sectionIndex, setSectionIndex] = useState(0);
   const [isMoving, setMoving] = useState(false);
+
   window.addEventListener("wheel", function(e){e.preventDefault();}, {passive: false} );
 
   useEffect(()=>{
@@ -85,6 +89,21 @@ const Popup = () => {
     ) 
   }
 
+  const activeRadioButton = (targetIndex) => {
+    let tmpSectionsTags = sectionsTags.map((section)=>{
+      return {...section}
+    });
+    
+    tmpSectionsTags[sectionIndex].style="";
+    tmpSectionsTags[targetIndex].style="active";
+
+    let elem = document.getElementById(sectionsTags[targetIndex].id); 
+    elem.scrollIntoView(); 
+
+    setSectionIndex(targetIndex);
+    setSectionsTags(tmpSectionsTags);
+  };
+
   const opts = {
     height: '390',
     width: '640',
@@ -96,10 +115,11 @@ const Popup = () => {
 
   return (
 
+    <>
     <div id="mm" className="menu" onWheel = {(e) => {
         console.log("try to scroll");
 
-        let elem = null;
+        let targetIndex = 0;
         if(!isMoving){
             setMoving(true);
             console.log("scroll !!");
@@ -113,7 +133,7 @@ const Popup = () => {
                   return;
                 }
                 setSectionIndex(sectionIndex + 1);
-                elem = document.getElementById(sectionsTags[sectionIndex + 1]); 
+                targetIndex = sectionIndex + 1;
             } else if (e.deltaY < 0){
               console.log('scrolling down');
               if(sectionIndex === 0 ){
@@ -122,9 +142,9 @@ const Popup = () => {
                 return;
               }
               setSectionIndex(sectionIndex - 1);
-              elem = document.getElementById(sectionsTags[sectionIndex - 1]); 
+              targetIndex = sectionIndex - 1;
             }
-            elem.scrollIntoView({ behavior: 'smooth'}); 
+            activeRadioButton (targetIndex)
             setTimeout(()=>{
               console.log("reset");
               Aos.refresh();
@@ -134,7 +154,7 @@ const Popup = () => {
         }
     }}>
         
-      <div id = {sectionsTags[0]} className="section">
+      <div id = {sectionsTags[0].id} className="section">
         <h1 data-aos="zoom-out" >About Us</h1>
         <p  data-aos="fade-down">
         Animals (also called Metazoa) are multicellular eukaryotic organisms that form the biological kingdom Animalia.
@@ -143,11 +163,11 @@ const Popup = () => {
         species have been described—of which around 1 million are insects—but it has been estimated there are over 7 million
         animal species in total </p>
       </div>
-      <div id = {sectionsTags[1]} className="section">
+      <div id = {sectionsTags[1].id} className="section">
         <h1 data-aos="zoom-out" >The ‘Propeterra’ Approach</h1>
         <YouTube videoId="7lmXyjyqxDs" opts={opts} />
       </div>
-      <div id = {sectionsTags[2]} className="section">
+      <div id = {sectionsTags[2].id} className="section">
         <h1 data-aos="zoom-out">Our data</h1>
         <br/>
         <br/>
@@ -163,7 +183,7 @@ const Popup = () => {
           onLeaveViewport={() => console.log('leave')} 
         />
       </div>
-      <div id = {sectionsTags[3]} className="section">
+      <div id = {sectionsTags[3].id} className="section">
         <h1 data-aos="zoom-out" >GIS Technologies</h1>
         {
           renderIcons([
@@ -173,7 +193,7 @@ const Popup = () => {
             ])
         }
       </div>
-      <div id = {sectionsTags[4]} className="section">
+      <div id = {sectionsTags[4].id} className="section">
         <h1 data-aos="zoom-out" >Actionable Insights</h1>
         {
           renderIcons([
@@ -183,11 +203,11 @@ const Popup = () => {
             ])
         }
       </div>
-      <div id = {sectionsTags[5]} className="section">
+      <div id = {sectionsTags[5].id} className="section">
         <h1 data-aos="zoom-out" >The Launchpad</h1>
         <img data-aos="zoom-in" style={{width:"80%", height:"55%"}} src="https://media0.giphy.com/media/KeKT3mcAgZRcvTl7pe/giphy.gif" alt="Trulli"></img>
       </div>
-      <div id = {sectionsTags[6]} className="section">
+      <div id = {sectionsTags[6].id} className="section">
         <h1 data-aos="zoom-out" >Deals Driving the Market</h1>
         <p  data-aos="fade-down">
         Animals (also called Metazoa) are multicellular eukaryotic organisms that form the biological kingdom Animalia.
@@ -196,7 +216,7 @@ const Popup = () => {
         species have been described—of which around 1 million are insects—but it has been estimated there are over 7 million
         animal species in total </p>
       </div>
-      <div id = {sectionsTags[7]} className="section">
+      <div id = {sectionsTags[7].id} className="section">
         <h1 data-aos="zoom-out" >Global Real Estate Experts</h1>
         <p  data-aos="fade-down">
         Animals (also called Metazoa) are multicellular eukaryotic organisms that form the biological kingdom Animalia.
@@ -205,7 +225,7 @@ const Popup = () => {
         species have been described—of which around 1 million are insects—but it has been estimated there are over 7 million
         animal species in total </p>
       </div>
-      <div id = {sectionsTags[8]} style={{paddingTop:"5vh"}} className="section">
+      <div id = {sectionsTags[8].id} style={{paddingTop:"5vh"}} className="section">
         <h1 data-aos="zoom-out" style={{marginBottom:"28px"}} >Request a Demo</h1>
         <Form>
           <Form.Group controlId="formBasicEmail">
@@ -237,8 +257,32 @@ const Popup = () => {
           </Button>
         </Form>
       </div>
-  
+
     </div>
+
+    <div id="fp-nav" className="right active" style={{marginTop:"-135px"}}>
+			<ul>
+        {
+          sectionsTags.map( (page, index) => { 
+              return <li key = {page.id}>
+                      <a href="#" className={page.style} onClick ={(e) => { activeRadioButton(index) }} >
+                        <span></span>
+                        <svg width="30" height="30">
+                          <circle cx="15" cy="15" r="11.5"></circle>
+                        </svg>
+                      </a>
+                        <div className="fp-tooltip right">
+                          {page.name}
+                        </div>
+                    </li>
+            })
+        }
+			</ul>
+		</div>
+    </>
+    
+
+
   );
 };
 
