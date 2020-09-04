@@ -12,9 +12,9 @@ body {
 }
 
 body {
-  background: url(./assets/imgs/planets/world.jpg) no-repeat center center fixed; 
-  background: url(./assets/imgs/planets/stars.jpg) no-repeat center center fixed; 
-  background: #300172;
+  /* background: url(./assets/imgs/planets/world.jpg) no-repeat center center fixed;  */
+  /* background: url(./assets/imgs/planets/stars.jpg) no-repeat center center fixed;  */
+  background: #fff;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;

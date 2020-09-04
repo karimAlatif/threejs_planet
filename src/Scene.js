@@ -188,6 +188,7 @@ class Scene extends Component {
        backgroundTexture
      ],
       (texture) => {
+        console.log("reacdy ",texture)
        this.scene.background = texture;
      }
    );
